@@ -1,0 +1,6 @@
+.git
+.gitignore
+.claude
+*.md
+.DS_Store
+Thumbs.db
