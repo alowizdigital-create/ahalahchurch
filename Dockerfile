@@ -2,6 +2,8 @@
 FROM nginx:1.27-alpine
 
 # Config Nginx dédiée (cache, routes propres)
+
+# Config Nginx dédiée (cache, routes propres)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Contenu du site (le dossier site/ est la racine du site publié)
