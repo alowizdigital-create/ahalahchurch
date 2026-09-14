@@ -1,17 +1,12 @@
-# Static site for Église Baptiste d'Ahala — served by nginx
+# Image de production — site statique FATBICAM servi par Nginx
 FROM nginx:1.27-alpine
 
-# Remove default nginx assets/config
-RUN rm -rf /usr/share/nginx/html/* \
-    && rm -f /etc/nginx/conf.d/default.conf
-
+# Config Nginx dédiée (cache, routes propres)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY index.html /usr/share/nginx/html/index.html
-COPY assets/ /usr/share/nginx/html/assets/
+
+# Contenu du site (le dossier site/ est la racine du site publié)
+COPY site/ /usr/share/nginx/html/
 
 EXPOSE 80
-
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \
-  CMD wget -qO- http://localhost/ >/dev/null 2>&1 || exit 1
 
 CMD ["nginx", "-g", "daemon off;"]
